@@ -1,6 +1,7 @@
 package com.cooknivo.app.data
 
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.serializer
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 
@@ -33,7 +34,7 @@ object CooknivoJson {
         val out = ArrayList<T>(array.size)
         for (element in array) {
             try {
-                out.add(instance.decodeFromJsonElement(element))
+                out.add(instance.decodeFromJsonElement(serializer<T>(), element))
             } catch (_: Exception) {
                 // Skip this malformed element; keep the valid ones.
             }
@@ -41,5 +42,5 @@ object CooknivoJson {
         return out
     }
 
-    inline fun <reified T> encode(value: T): String = instance.encodeToString(value)
+    inline fun <reified T> encode(value: T): String = instance.encodeToString(serializer<T>(), value)
 }

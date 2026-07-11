@@ -71,7 +71,7 @@ class CooknivoRepository(context: Context) {
     private fun decodeSettings(raw: String?): AppSettings {
         if (raw.isNullOrBlank()) return AppSettings()
         return try {
-            CooknivoJson.instance.decodeFromString(raw)
+            CooknivoJson.instance.decodeFromString(AppSettings.serializer(), raw)
         } catch (_: Exception) {
             AppSettings()
         }
