@@ -48,7 +48,7 @@ class ShoppingGenTest {
     fun toItemsSkipsExistingWhenNotAllowingDuplicates() {
         val existing = listOf(ShoppingItem(id = "x", title = "Flour"))
         val preview = ShoppingGen.buildPreview(listOf(ing("1", "Flour"), ing("2", "Eggs")), existing)
-        val added = ShoppingGen.toShoppingItems(preview, "r1", allowDuplicates = false, "2026-01-01T00:00:00Z", { "new-" + it })
+        val added = ShoppingGen.toShoppingItems(preview, "r1", allowDuplicates = false, "2026-01-01T00:00:00Z", { "new" })
         assertEquals(1, added.size)
         assertEquals("Eggs", added[0].title)
     }
