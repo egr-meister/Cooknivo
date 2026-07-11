@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base app theme (window background before Compose takes over). -->
+    <style name="Theme.Cooknivo" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/app_background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <!-- Splash theme using the AndroidX Core SplashScreen API. -->
+    <style name="Theme.Cooknivo.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/card_cream</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_box</item>
+        <item name="postSplashScreenTheme">@style/Theme.Cooknivo</item>
+    </style>
+</resources>

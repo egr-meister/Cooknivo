@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="app_background">#F1EBE1</color>
+    <color name="card_cream">#FFF8E9</color>
+    <color name="recipe_terracotta">#B9684A</color>
+    <color name="deep_terracotta">#8E4C37</color>
+    <color name="warm_wood">#9C704D</color>
+    <color name="deep_wood">#6F4B34</color>
+    <color name="deep_text">#2D2925</color>
+    <color name="ic_launcher_background">#B9684A</color>
+</resources>
