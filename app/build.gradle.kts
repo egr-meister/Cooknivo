@@ -105,11 +105,10 @@ android {
             } else {
                 // Fail clearly instead of silently signing with the debug key.
                 gradle.taskGraph.whenReady {
-                    val buildingRelease = allTasks.any { task ->
-                        val n = task.name
-                        n.contains("Release") && (n.startsWith("assemble") ||
-                            n.startsWith("bundle") || n.startsWith("package"))
-                    }
+                    // Only fail for the actual release artifact tasks. Tasks like
+                    // testReleaseUnitTest must NOT trip this guard (they need no signing).
+                    val releaseArtifactTasks = setOf("assembleRelease", "bundleRelease")
+                    val buildingRelease = allTasks.any { it.name in releaseArtifactTasks }
                     if (buildingRelease) {
                         throw GradleException(
                             "Release signing credentials are missing. Provide either the " +
