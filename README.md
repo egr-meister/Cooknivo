@@ -238,13 +238,13 @@ Onboarding · Recipe Card Box (home) · Add Recipe · Edit Recipe · Recipe Deta
 ### Requirements
 
 - **JDK 17**
-- **Android API 35**: `compileSdk = 35`, `targetSdk = 35`, `minSdk = 24`
-- Android Gradle Plugin 8.5.x, Kotlin 1.9.24, Compose Compiler 1.5.14
-- Gradle 8.9 (via the wrapper)
+- **Android API 36**: `compileSdk = 36`, `targetSdk = 36`, `minSdk = 24`
+- Android Gradle Plugin 8.9.1, Kotlin 1.9.24, Compose Compiler 1.5.14
+- Gradle 8.11.1 (via the wrapper)
 
 ### 16 KB page-size compatibility
 
-Because the app is pure Kotlin/Compose/DataStore with **no native third-party binaries**, it is compatible with Android 15+ 16 KB memory page sizes. Still verify the final release bundle on a 16 KB target/emulator.
+Because the app is pure Kotlin/Compose/DataStore with **no native third-party binaries**, it is compatible with Android 15+ 16 KB memory page sizes (and targets Android 16 / API 36). Still verify the final release bundle on a 16 KB target/emulator.
 
 ### Debug build
 
@@ -326,7 +326,7 @@ Create the base64 value with `base64 -w0 cooknivo-release-key.p12` (Linux) or `b
 
 ## GitHub Actions
 
-`.github/workflows/android-build.yml` runs on push to `main` and via manual dispatch. It checks out the repo, sets up JDK 17 and the Android SDK (Platform 35, Build Tools 35.0.0), provisions Gradle 8.9 with caching (generating the wrapper if absent), decodes `ANDROID_KEYSTORE_BASE64` into a temporary PKCS12 file, exposes signing secrets only as environment variables, runs unit tests, and builds the **signed release APK and AAB**. It then locates the APK, runs `apksigner verify --print-certs`, prints the certificate, **fails** if verification fails or if the certificate contains `CN=Android Debug`, and uploads the signed APK (test artifact) and signed AAB (Google Play artifact). Passwords and base64 values are never printed.
+`.github/workflows/android-build.yml` runs on push to `main` and via manual dispatch. It checks out the repo, sets up JDK 17 and the Android SDK (Platform 36, Build Tools 36.0.0), provisions Gradle 8.11.1 with caching (generating the wrapper if absent), decodes `ANDROID_KEYSTORE_BASE64` into a temporary PKCS12 file, exposes signing secrets only as environment variables, runs unit tests, and builds the **signed release APK and AAB**. It then locates the APK, runs `apksigner verify --print-certs`, prints the certificate, **fails** if verification fails or if the certificate contains `CN=Android Debug`, and uploads the signed APK (test artifact) and signed AAB (Google Play artifact). Passwords and base64 values are never printed.
 
 CI is responsible for compilation, signing, certificate verification, and artifact generation — it is **not** proof that the app launches. Always run a local install/launch test.
 
@@ -376,7 +376,7 @@ Test, at minimum:
 - Delete shopping list; delete all recipes; reset all local data; relaunch
 - Launch in airplane mode and confirm full functionality
 - Confirm no INTERNET permission, no runtime permission dialog, no online search, no camera/image picker, no calorie/nutrition/diet fields
-- Inspect `adb logcat`; verify release certificate; verify AAB generation; verify API 35; verify 16 KB page-size compatibility
+- Inspect `adb logcat`; verify release certificate; verify AAB generation; verify API 36; verify 16 KB page-size compatibility
 
 ---
 
